@@ -46,15 +46,21 @@ function runEnter() {
 
     function filterPlainArray(array, filters) {
         const filterKeys = Object.keys(filters);
+        console.log(filters);
         return array.filter(item => {
           // validates all filter criteria
           return filterKeys.every(key => {
+            // console.log(item[key]);
             // ignores an empty filter
-            if (!filters[key].length) return true;
+            if (!filters[key][0].length) return true;
             return filters[key].find(filter => getValue(filter) === getValue(item[key]));
+
           });
         });
+        
     };
+
+    
     
 
     const filters = {
