@@ -1,3 +1,4 @@
+// Set up the initial variables to call our data, the button, form, and body of the page
 var UFO = data;
 
 var button = d3.select("#filter-btn");
@@ -6,12 +7,15 @@ var form = d3.select("#form");
 
 var tbody = d3.select("tbody");
 
+// Tell the function to run if the button is clicked or enter is pressed on the form
 button.on("click", runEnter);
-form.on("submit",runEnter);
+form.on("submit", runEnter);
 
+// Create run enter function
 function runEnter() {
+  // Prevent the page from refreshing
     d3.event.preventDefault();
-
+    // Create variables to hold all of our searh terms
     var inputDate= d3.select("#datetime");
 
     var inputDateValue = inputDate.property("value");
@@ -32,37 +36,26 @@ function runEnter() {
 
     var inputShapeValue = inputShape.property("value")
 
-    // console.log(inputValue);
-    // console.log(UFO);
+    // Console log to check our work
+    console.log(inputValue);
+    console.log(UFO);
 
-    // function filterArray(array, filters) {
-    // var filteredDate = UFO.filter(date => date.datetime === inputDateValue);
-    // var filteredState = UFO.filter(state => state.state === inputStateValue);
-    // var filteredData = filteredData.filter(city => city.city === inputCityValue);
-    // var filteredData = filteredData.filter(country => country.country === inputCountryValue);
-    // var filteredData = filteredData.filter(shape => shape.shape === inputValueShape);
-
+    // Make sure all the values are strings and uppercase
     const getValue = value => (typeof value === 'string' ? value.toUpperCase() : value);
-
+    // Create a filter to allow 1-5 different search values
     function filterPlainArray(array, filters) {
         const filterKeys = Object.keys(filters);
-        console.log(filters);
         return array.filter(item => {
-          // validates all filter criteria
+          // Validate all filter criteria
           return filterKeys.every(key => {
-            // console.log(item[key]);
-            // ignores an empty filter
+            // Ignore an empty filter
             if (!filters[key][0].length) return true;
             return filters[key].find(filter => getValue(filter) === getValue(item[key]));
-
           });
         });
-        
     };
 
-    
-    
-
+    // Set up our filters to match with the input values
     const filters = {
         datetime: [inputDateValue],
         state: [inputStateValue],
@@ -70,11 +63,12 @@ function runEnter() {
         country: [inputCountryValue],
         shape: [inputShapeValue],
       };
-
+    // Create a new variable to hold all the filtered data
     var filteredDataB = filterPlainArray(UFO,filters);
 
     console.log(filteredDataB);
-
+    
+    // Add each result from the filtered dataset to the table
     filteredDataB.forEach(function(sightingReport) {
     var row = tbody.append("tr");
     Object.entries(sightingReport).forEach(function([key, value]) {
@@ -83,5 +77,4 @@ function runEnter() {
         cell.text(value);
         });
     });
-
 };

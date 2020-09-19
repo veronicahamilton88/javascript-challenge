@@ -11,7 +11,7 @@
 
 <body>
   <div class="wrapper">
-    <nav class="navbar navbar-default">
+    <nav class="navbar">
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="index.html">UFO Sightings
@@ -29,18 +29,19 @@
         <div class="col-md-2">
           <aside class="filters">
             <div class="panel panel-default">
-              <div class="panel-heading">Filter Search</div>
+              <div class="panel-heading"><h3>Filter Search</h3></div>
               <div class="panel-body">
                 <form id="form">
                   <div class="form-group">
                     <ul class="list-group" id="filters">
                       <li class="filter list-group-item">
-                        <label for="date">Enter a Date</label>
-                        <input class="form-control" id="datetime" type="text" placeholder="1/11/2011">
+                        <label for="date">Enter a Date (1/1/2010-1/13/2010)</label>
+                        <input class="form-control" id="datetime" type="text" placeholder="1/01/2010">
+                        <button id="filter-btn" type="button" class="bg-primary">Filter Table</button><BR>
+                          <p>*Refresh the page to reset the search filter</p>
                       </li>
                     </ul>
                   </div>
-                  <button id="filter-btn" type="button" class="btn btn-default">Filter Table</button>
                 </form>
               </div>
             </div>
@@ -66,8 +67,9 @@
         </div>
       </div>
     </div>
-    <footer class="footer">
+    <footer class="footer"><center>
       <span class="bottom">Created by: Veronica Hamilton</span>
+      </center>
     </footer>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
